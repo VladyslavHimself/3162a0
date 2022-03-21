@@ -62,9 +62,9 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = (body) => {
+  const postMessage = async (body) => {
     try {
-      const data = saveMessage(body);
+      const data = await saveMessage(body);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -88,13 +88,14 @@ const Home = ({ user, logout }) => {
         }
       });
       setConversations(conversations);
+      __fetchConversations();
     },
     [setConversations, conversations],
   );
   const addMessageToConversation = useCallback(
-    (data) => {
+    async (data) => {
       // if sender isn't null, that means the message needs to be put in a brand new convo
-      const { message, sender = null } = data;
+      const { message, sender = null } = await data;
       if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
@@ -103,6 +104,7 @@ const Home = ({ user, logout }) => {
         };
         newConvo.latestMessageText = message.text;
         setConversations((prev) => [newConvo, ...prev]);
+        
       }
 
       conversations.forEach((convo) => {
@@ -112,6 +114,7 @@ const Home = ({ user, logout }) => {
         }
       });
       setConversations(conversations);
+      __fetchConversations();
     },
     [setConversations, conversations],
   );
@@ -177,6 +180,15 @@ const Home = ({ user, logout }) => {
       else history.push("/register");
     }
   }, [user, history, isLoggedIn]);
+
+  const __fetchConversations = async () => {
+    try {
+      const { data } = await axios.get("/api/conversations");
+      setConversations(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchConversations = async () => {
