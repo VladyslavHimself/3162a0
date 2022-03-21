@@ -16,14 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = ({ user, logout }) => {
   const history = useHistory();
-
   const socket = useContext(SocketContext);
+  const classes = useStyles();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
-
-  const classes = useStyles();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addSearchedUsers = (users) => {
     const currentUsers = {};
@@ -88,10 +86,11 @@ const Home = ({ user, logout }) => {
         }
       });
       setConversations(conversations);
-      __fetchConversations();
+      fetchConversations();
     },
     [setConversations, conversations],
   );
+
   const addMessageToConversation = useCallback(
     async (data) => {
       // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -114,7 +113,7 @@ const Home = ({ user, logout }) => {
         }
       });
       setConversations(conversations);
-      __fetchConversations();
+      fetchConversations();
     },
     [setConversations, conversations],
   );
@@ -151,6 +150,15 @@ const Home = ({ user, logout }) => {
     );
   }, []);
 
+  const fetchConversations = async () => {
+    try {
+      const { data } = await axios.get("/api/conversations");
+      setConversations(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // Lifecycle
 
   useEffect(() => {
@@ -181,24 +189,7 @@ const Home = ({ user, logout }) => {
     }
   }, [user, history, isLoggedIn]);
 
-  const __fetchConversations = async () => {
-    try {
-      const { data } = await axios.get("/api/conversations");
-      setConversations(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    const fetchConversations = async () => {
-      try {
-        const { data } = await axios.get("/api/conversations");
-        setConversations(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     if (!user.isFetching) {
       fetchConversations();
     }
