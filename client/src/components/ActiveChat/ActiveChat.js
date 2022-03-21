@@ -49,7 +49,7 @@ const ActiveChat = ({
             {user && (
               <>
                 <Messages
-                  messages={conversation.messages.reverse()}
+                  messages={conversation.messages}
                   otherUser={conversation.otherUser}
                   userId={user.id}
                 />
