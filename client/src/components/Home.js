@@ -85,7 +85,7 @@ const Home = ({ user, logout }) => {
           convo.id = message.conversationId;
         }
       });
-      setConversations(conversations);
+      
       fetchConversations();
     },
     [setConversations, conversations],
@@ -112,7 +112,6 @@ const Home = ({ user, logout }) => {
           convo.latestMessageText = message.text;
         }
       });
-      setConversations(conversations);
       fetchConversations();
     },
     [setConversations, conversations],
