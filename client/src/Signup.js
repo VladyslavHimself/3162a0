@@ -58,10 +58,10 @@ const Signup = ({ user, register }) => {
       }
 
       <Box className={classes.container}>
-        <AuthForm authHandler={ handleRegister} isMobile={isMobile}>
-          <IInput inputType="text" inputName="Username" isRequired />
-          <IInput inputType="email" inputName="Email" inputLabel='E-mail address' isRequired />
-          <IInput inputType="password" inputName="Password" isRequired />
+        <AuthForm authHandler={handleRegister} isMobile={isMobile}>
+          <IInput type="text" name="Username" isRequired />
+          <IInput type="email" name="Email" label='E-mail address' isRequired />
+          <IInput type="password" name="Password" isRequired />
         </AuthForm>
       </Box>
     </AuthLayout>

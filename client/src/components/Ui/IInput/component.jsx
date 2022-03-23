@@ -11,17 +11,17 @@ const inputStyles = makeStyles({
   },
 });
 
-export const IInput = ({ inputType = 'text', inputName, inputLabel = inputName, isRequired = false }) => {
+export const IInput = ({ type = 'text', name, label = name, isRequired = false }) => {
 
   const classes = inputStyles();
 
   return (
     <FormControl className={classes['input']}>
       <TextField
-        aria-label="username"
-        label={inputLabel}
-        name={inputName}
-        type={inputType}
+        aria-label={label}
+        label={label}
+        name={name}
+        type={type}
         required={isRequired}
       />
     </FormControl>
