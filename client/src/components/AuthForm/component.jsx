@@ -48,7 +48,8 @@ export const AuthForm = ({ isMobile, authHandler, children }) => {
         {children}
 
         {
-          isMobile ? (
+          isMobile ? 
+          (
             <Box display='flex' justifyContent='space-between' marginTop='40px'>
               <Box className={classes['auth-form__submit-button']}>
                 <Link href='/login' to='/login' style={{textDecoration: 'none'}}>
@@ -60,7 +61,9 @@ export const AuthForm = ({ isMobile, authHandler, children }) => {
                 <IButton styleType='accent' text='Create' isSubmit />
               </Box>
             </Box>
-          ) : (
+          ) 
+            : 
+          (
             <Box className={classes['auth-form__submit-button']}>
               <IButton styleType='accent' text='Create' isSubmit />
             </Box>
