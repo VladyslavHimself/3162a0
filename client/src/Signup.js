@@ -24,14 +24,17 @@ const useStyles = makeStyles({
     width: '41.5%',
     height: '100vh',
     position: 'relative',
-  }, 
+  },
 
   'side-banner__textbox': {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    textAlign: 'center'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   'side-banner__header': {
@@ -41,9 +44,13 @@ const useStyles = makeStyles({
     fontWeight: 400,
     fontSize: '26px',
     lineHeight: '40px',
-    textAlign: 'center',
     color: '#f4f4f4',
-    marginLeft: '50px',
+    
+  },
+
+  'side-banner__logo': {
+    width: '66px',
+    height: '66px',
   },
 
   button: {
@@ -53,6 +60,16 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100%',
     color: '#3A8DFF',
+  },
+
+  'button--accent': {
+
+    boxShadow: '0px 2px 12px rgba(74, 106, 149, 0.2)',
+    borderRadius: '5px',
+    width: '100%',
+    height: '100%',
+    background: '#3A8DFF',
+    color: '#fff',
   },
 
   hint: {
@@ -77,15 +94,45 @@ const useStyles = makeStyles({
     lineHeight: '19px',
     textAlign: 'center',
     color: '#B0B0B0',
+  },
+
+  container: {
+    width: '58.5%',
+    height: '100vh',
+
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  'auth-form': {
+    marginTop: '50px',
+    width: '380px',
+  },
+
+  'auth-form__form-field': {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  'auth-form__input': {
+    marginTop: '40px',
+  },
+
+  'auth-form__header': {
+    width: '100%',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '26px',
+    lineHeight: '40px',
+    margin: 0,
   }
 });
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
-
   const classes = useStyles();
-
-  const [formErrorMessage, setFormErrorMessage] = useState({});
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -94,12 +141,7 @@ const Signup = ({ user, register }) => {
     const username = formElements.username.value;
     const email = formElements.email.value;
     const password = formElements.password.value;
-    const confirmPassword = formElements.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: 'Passwords must match' });
-      return;
-    }
     await register({ username, email, password });
   };
 
@@ -112,20 +154,63 @@ const Signup = ({ user, register }) => {
       <Box className={classes['side-banner']}>
         <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
         <Box className={classes['side-banner__textbox']}>
-          <img src={chatSvg} alt='chat-logo' />
+          <img className={classes['side-banner__logo']} src={chatSvg} alt='chat-logo' />
           <h1 className={classes['side-banner__header']}>Converse with anyone with any language</h1>
         </Box>
-      </Box>  
-
+      </Box>
 
       <Box className={classes.hint}>
         <span className={classes.hint__text}>Already have an account?</span>
         <Box width='140px' height='54px'>
-          <Button variant="contained" className={classes.button}>Login</Button>
+          <Link href="/login" to="/login">
+            <Button variant="contained" className={classes.button}>Login</Button>
+          </Link>
         </Box>
       </Box>
-      
-      
+
+
+      <Box className={classes.container}>
+        <Box className={classes['auth-form']}>
+          <h2 className={classes['auth-form__header']}>Create your account</h2>
+
+          <form className={classes['auth-form__form-field']} onSubmit={handleRegister}>
+            <FormControl className={classes['auth-form__input']}>
+              <TextField
+                aria-label="username"
+                label="Username"
+                name="username"
+                type="text"
+                required
+              />
+            </FormControl>
+            
+            <FormControl className={classes['auth-form__input']}>
+              <TextField
+                label="E-mail address"
+                aria-label="e-mail address"
+                type="email"
+                name="email"
+                required
+              />
+            </FormControl>
+            
+            <FormControl className={classes['auth-form__input']}>
+              <TextField
+                aria-label="password"
+                label="Password"
+                type="password"
+                inputProps={{ minLength: 6 }}
+                name="password"
+                required
+              />
+            </FormControl>
+
+            <Box width='140px' height='54px' display='flex' alignSelf='center' marginTop='40px' className={classes['auth-form__submit-button']}>
+              <Button variant="contained" size="large"  type="submit" className={classes['button--accent']}>Login</Button>
+            </Box>
+          </form>
+        </Box>
+      </Box>
     </Box>
   );
 };
@@ -145,64 +230,64 @@ export default Signup;
 //             <Button>Login</Button>
 //           </Link>
 //         </Grid>
-//         <form onSubmit={handleRegister}>
-//           <Grid>
-//             <Grid>
-//               <FormControl>
-//                 <TextField
-//                   aria-label="username"
-//                   label="Username"
-//                   name="username"
-//                   type="text"
-//                   required
-//                 />
-//               </FormControl>
-//             </Grid>
-//             <Grid>
-//               <FormControl>
-//                 <TextField
-//                   label="E-mail address"
-//                   aria-label="e-mail address"
-//                   type="email"
-//                   name="email"
-//                   required
-//                 />
-//               </FormControl>
-//             </Grid>
-//             <Grid>
-//               <FormControl error={!!formErrorMessage.confirmPassword}>
-//                 <TextField
-//                   aria-label="password"
-//                   label="Password"
-//                   type="password"
-//                   inputProps={{ minLength: 6 }}
-//                   name="password"
-//                   required
-//                 />
-//                 <FormHelperText>
-//                   {formErrorMessage.confirmPassword}
-//                 </FormHelperText>
-//               </FormControl>
-//             </Grid>
-//             <Grid>
-//               <FormControl error={!!formErrorMessage.confirmPassword}>
-//                 <TextField
-//                   label="Confirm Password"
-//                   aria-label="confirm password"
-//                   type="password"
-//                   inputProps={{ minLength: 6 }}
-//                   name="confirmPassword"
-//                   required
-//                 />
-//                 <FormHelperText>
-//                   {formErrorMessage.confirmPassword}
-//                 </FormHelperText>
-//               </FormControl>
-//             </Grid>
-//             <Button type="submit" variant="contained" size="large">
-//               Create
-//             </Button>
-//           </Grid>
-//         </form>
+// <form onSubmit={handleRegister}>
+//   <Grid>
+//     <Grid>
+//       <FormControl>
+//         <TextField
+//           aria-label="username"
+//           label="Username"
+//           name="username"
+//           type="text"
+//           required
+//         />
+//       </FormControl>
+//     </Grid>
+//     <Grid>
+//       <FormControl>
+//         <TextField
+//           label="E-mail address"
+//           aria-label="e-mail address"
+//           type="email"
+//           name="email"
+//           required
+//         />
+//       </FormControl>
+//     </Grid>
+//     <Grid>
+//       <FormControl error={!!formErrorMessage.confirmPassword}>
+//         <TextField
+//           aria-label="password"
+//           label="Password"
+//           type="password"
+//           inputProps={{ minLength: 6 }}
+//           name="password"
+//           required
+//         />
+//         <FormHelperText>
+//           {formErrorMessage.confirmPassword}
+//         </FormHelperText>
+//       </FormControl>
+//     </Grid>
+//     <Grid>
+//       <FormControl error={!!formErrorMessage.confirmPassword}>
+//         <TextField
+//           label="Confirm Password"
+//           aria-label="confirm password"
+//           type="password"
+//           inputProps={{ minLength: 6 }}
+//           name="confirmPassword"
+//           required
+//         />
+//         <FormHelperText>
+//           {formErrorMessage.confirmPassword}
+//         </FormHelperText>
+//       </FormControl>
+//     </Grid>
+//     <Button type="submit" variant="contained" size="large">
+//       Create
+//     </Button>
+//   </Grid>
+// </form>
 //       </Box>
 //     </Grid>
