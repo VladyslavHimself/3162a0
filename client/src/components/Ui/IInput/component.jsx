@@ -11,8 +11,13 @@ const inputStyles = makeStyles({
   },
 });
 
-export const IInput = ({ type = 'text', name, label = name, isRequired = false }) => {
+const convertToUppercase = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
+export const IInput = ({ type = 'text', name, label = convertToUppercase(name), isRequired = false }) => {
+  
+  
   const classes = inputStyles();
 
   return (
