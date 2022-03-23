@@ -20,7 +20,6 @@ const hintStyle = makeStyles({
   },
 
   hint__text: {
-    marginRight: '30px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 400,
@@ -38,7 +37,7 @@ export const Hint = ({ hintText, link, buttonText }) => {
   return (
     <Box className={classes.hint}>
       <span className={classes.hint__text}>{hintText}</span>
-      <Box width='140px' height='54px'>
+      <Box padding='140px 20px'>
         <Link href={link} to={link} style={{textDecoration: 'none'}}>
           <IButton styleType='ghost' text={buttonText} />
         </Link>

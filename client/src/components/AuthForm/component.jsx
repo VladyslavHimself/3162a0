@@ -33,16 +33,18 @@ const authFormStyles = makeStyles({
     width:'140px',
     height:'54px',
     display:'flex',
-    alignSelf:'center'
+    alignSelf:'center',
+
+    marginTop: '40px'
   }
 });
 
-export const AuthForm = ({ isMobile, authHandler, children }) => {
+export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonValue }) => {
   const classes = authFormStyles();
 
   return (
     <Box className={classes['auth-form']}>
-      <h2 className={classes['auth-form__header']}>Create your account.</h2>
+      <h2 className={classes['auth-form__header']}>{title}</h2>
       <form className={classes['auth-form__form-field']} onSubmit={authHandler}>
 
         {children}
@@ -58,14 +60,14 @@ export const AuthForm = ({ isMobile, authHandler, children }) => {
               </Box>
 
               <Box className={classes['auth-form__submit-button']}>
-                <IButton styleType='accent' text='Create' isSubmit />
+                <IButton styleType='accent' text={sumbitButtonValue} isSubmit />
               </Box>
             </Box>
           ) 
             : 
           (
             <Box className={classes['auth-form__submit-button']}>
-              <IButton styleType='accent' text='Create' isSubmit />
+              <IButton styleType='accent' text={sumbitButtonValue} isSubmit />
             </Box>
           )
         }

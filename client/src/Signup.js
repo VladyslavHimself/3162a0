@@ -43,7 +43,6 @@ const Signup = ({ user, register }) => {
   }, [user, history]);
 
   const matches = useMediaQuery('(max-width:700px)');
-
   const isMobile = !!matches;
 
   return (
@@ -58,7 +57,12 @@ const Signup = ({ user, register }) => {
       }
 
       <Box className={classes.container}>
-        <AuthForm authHandler={handleRegister} isMobile={isMobile}>
+        <AuthForm
+         authHandler={handleRegister}
+         isMobile={isMobile}
+         title={'Create an account.'}
+         sumbitButtonValue={'Register'}
+        >
           <IInput type="text" name="username" isRequired />
           <IInput type="email" name="email" label='E-mail address' isRequired />
           <IInput type="password" name="password" isRequired />
