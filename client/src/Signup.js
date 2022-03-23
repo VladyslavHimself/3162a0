@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
-  Grid,
   Box,
-  Typography,
-  Button,
   FormControl,
   TextField,
-  FormHelperText,
   makeStyles,
 } from '@material-ui/core';
 
 import bgImg from './assets/bg-img.png';
 import chatSvg from './assets/chat-icon.svg';
+import Hint from './components/Hint';
+import { IButton } from './components/Ui/Button/component';
 
 const useStyles = makeStyles({
   'side-banner__image': {
@@ -51,49 +49,6 @@ const useStyles = makeStyles({
   'side-banner__logo': {
     width: '66px',
     height: '66px',
-  },
-
-  button: {
-    background: '#FFFFFF',
-    boxShadow: '0px 2px 12px rgba(74, 106, 149, 0.2)',
-    borderRadius: '5px',
-    width: '100%',
-    height: '100%',
-    color: '#3A8DFF',
-  },
-
-  'button--accent': {
-
-    boxShadow: '0px 2px 12px rgba(74, 106, 149, 0.2)',
-    borderRadius: '5px',
-    width: '100%',
-    height: '100%',
-    background: '#3A8DFF',
-    color: '#fff',
-  },
-
-  hint: {
-    display: 'flex',
-    width: 'fit-content',
-    height: '100px',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    position: 'absolute',
-    left: '90%',
-    top: '3%',
-    transform: 'translate(-90%, -10%)',
-
-  },
-
-  hint__text: {
-    marginRight: '30px',
-    fontFamily: 'Open Sans',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: '14px',
-    lineHeight: '19px',
-    textAlign: 'center',
-    color: '#B0B0B0',
   },
 
   container: {
@@ -159,20 +114,16 @@ const Signup = ({ user, register }) => {
         </Box>
       </Box>
 
-      <Box className={classes.hint}>
-        <span className={classes.hint__text}>Already have an account?</span>
-        <Box width='140px' height='54px'>
-          <Link href="/login" to="/login">
-            <Button variant="contained" className={classes.button}>Login</Button>
-          </Link>
-        </Box>
-      </Box>
-
+      
+      <Hint
+        hintText='Already have an account?'
+        link='/login'
+        buttonText='Login'
+      />
 
       <Box className={classes.container}>
         <Box className={classes['auth-form']}>
-          <h2 className={classes['auth-form__header']}>Create your account</h2>
-
+          <h2 className={classes['auth-form__header']}>Create your account.</h2>
           <form className={classes['auth-form__form-field']} onSubmit={handleRegister}>
             <FormControl className={classes['auth-form__input']}>
               <TextField
@@ -206,7 +157,7 @@ const Signup = ({ user, register }) => {
             </FormControl>
 
             <Box width='140px' height='54px' display='flex' alignSelf='center' marginTop='40px' className={classes['auth-form__submit-button']}>
-              <Button variant="contained" size="large"  type="submit" className={classes['button--accent']}>Login</Button>
+              <IButton styleType='accent'  text='Create' isSubmit />
             </Box>
           </form>
         </Box>
@@ -216,78 +167,3 @@ const Signup = ({ user, register }) => {
 };
 
 export default Signup;
-
-
-
-/// ---- 
-
-
-// <Grid container justifyContent="center">
-//       <Box>
-//         <Grid container item>
-//           <Typography>Need to log in?</Typography>
-//           <Link href="/login" to="/login">
-//             <Button>Login</Button>
-//           </Link>
-//         </Grid>
-// <form onSubmit={handleRegister}>
-//   <Grid>
-//     <Grid>
-//       <FormControl>
-//         <TextField
-//           aria-label="username"
-//           label="Username"
-//           name="username"
-//           type="text"
-//           required
-//         />
-//       </FormControl>
-//     </Grid>
-//     <Grid>
-//       <FormControl>
-//         <TextField
-//           label="E-mail address"
-//           aria-label="e-mail address"
-//           type="email"
-//           name="email"
-//           required
-//         />
-//       </FormControl>
-//     </Grid>
-//     <Grid>
-//       <FormControl error={!!formErrorMessage.confirmPassword}>
-//         <TextField
-//           aria-label="password"
-//           label="Password"
-//           type="password"
-//           inputProps={{ minLength: 6 }}
-//           name="password"
-//           required
-//         />
-//         <FormHelperText>
-//           {formErrorMessage.confirmPassword}
-//         </FormHelperText>
-//       </FormControl>
-//     </Grid>
-//     <Grid>
-//       <FormControl error={!!formErrorMessage.confirmPassword}>
-//         <TextField
-//           label="Confirm Password"
-//           aria-label="confirm password"
-//           type="password"
-//           inputProps={{ minLength: 6 }}
-//           name="confirmPassword"
-//           required
-//         />
-//         <FormHelperText>
-//           {formErrorMessage.confirmPassword}
-//         </FormHelperText>
-//       </FormControl>
-//     </Grid>
-//     <Button type="submit" variant="contained" size="large">
-//       Create
-//     </Button>
-//   </Grid>
-// </form>
-//       </Box>
-//     </Grid>
