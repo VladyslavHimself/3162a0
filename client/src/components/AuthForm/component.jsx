@@ -6,6 +6,8 @@ import {
 
 import IButton from './../Ui/Button';
 
+import { Link } from 'react-router-dom';
+
 const authFormStyles = makeStyles({
   'auth-form': {
     marginTop: '50px',
@@ -25,22 +27,45 @@ const authFormStyles = makeStyles({
     fontSize: '26px',
     lineHeight: '40px',
     marginBottom: '20px',
+  },
+
+  'auth-form__submit-button': {
+    width:'140px',
+    height:'54px',
+    display:'flex',
+    alignSelf:'center'
   }
 });
 
-export const AuthForm = ({ authHandler, children }) => {
+export const AuthForm = ({ isMobile, authHandler, children }) => {
   const classes = authFormStyles();
 
   return (
     <Box className={classes['auth-form']}>
       <h2 className={classes['auth-form__header']}>Create your account.</h2>
       <form className={classes['auth-form__form-field']} onSubmit={authHandler}>
-  
-        { children && children }
 
-        <Box width='140px' height='54px' display='flex' alignSelf='center' marginTop='40px' className={classes['auth-form__submit-button']}>
-          <IButton styleType='accent'  text='Create' isSubmit />
-        </Box>
+        {children}
+
+        {
+          isMobile ? (
+            <Box display='flex' justifyContent='space-between' marginTop='40px'>
+              <Box className={classes['auth-form__submit-button']}>
+                <Link href='/login' to='/login' style={{textDecoration: 'none'}}>
+                  <IButton styleType='outline' text='Login' />
+                </Link>
+              </Box>
+
+              <Box className={classes['auth-form__submit-button']}>
+                <IButton styleType='accent' text='Create' isSubmit />
+              </Box>
+            </Box>
+          ) : (
+            <Box className={classes['auth-form__submit-button']}>
+              <IButton styleType='accent' text='Create' isSubmit />
+            </Box>
+          )
+        }
       </form>
     </Box>
   )

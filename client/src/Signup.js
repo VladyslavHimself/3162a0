@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import {
   Box,
   makeStyles,
+  useMediaQuery,
 } from '@material-ui/core';
 
 import Hint from './components/Hint';
@@ -41,16 +42,23 @@ const Signup = ({ user, register }) => {
     if (user && user.id) history.push('/home');
   }, [user, history]);
 
+  const matches = useMediaQuery('(max-width:700px)');
+
+  const isMobile = !!matches;
+
   return (
     <AuthLayout>
-      <Hint
+      {
+        !isMobile && 
+        <Hint
         hintText='Already have an account?'
         link='/login'
         buttonText='Login'
       />
+      }
 
       <Box className={classes.container}>
-        <AuthForm authHandler={ handleRegister }>
+        <AuthForm authHandler={ handleRegister} isMobile={isMobile}>
           <IInput inputType="text" inputName="Username" isRequired />
           <IInput inputType="email" inputName="Email" inputLabel='E-mail address' isRequired />
           <IInput inputType="password" inputName="Password" isRequired />

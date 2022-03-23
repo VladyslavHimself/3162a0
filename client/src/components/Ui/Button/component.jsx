@@ -14,6 +14,16 @@ const buttonStyles = makeStyles({
     color: '#3A8DFF',
   },
 
+  'outline': {
+    background: 'transparent',
+    color: '#3A8DFF',
+    boxShadow: 'none',
+
+    '&:hover': {
+      background: 'transparent',
+    }
+  },
+
   'accent': {
     background: '#3A8DFF',
     color: '#fff',
@@ -24,13 +34,14 @@ const buttonStyles = makeStyles({
   },
 })
 
-export const IButton = ({ styleType = 'ghost' | 'accent' , text, isSubmit = false }) => {
+export const IButton = ({ styleType = 'accent', text, isSubmit = false }) => {
   const classes = buttonStyles();
 
   const cls = [classes.button];
 
   styleType === 'ghost' && cls.push(classes.ghost);
   styleType === 'accent' && cls.push(classes.accent);
+  styleType === 'outline' && cls.push(classes.outline);
 
   return (
     <Button
