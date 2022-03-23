@@ -7,12 +7,11 @@ import {
 } from '@material-ui/core';
 
 import Hint from './components/Hint';
-import { AuthLayout } from './Layouts/AuthLayout/component';
-import { AuthForm } from './components/AuthForm/component';
-import { IInput } from './components/Ui/IInput/component';
+import AuthLayout from './Layouts/AuthLayout';
+import AuthForm from './components/AuthForm';
+import IInput from './components/Ui/IInput';
 
 const useStyles = makeStyles({
-  
   container: {
     width: '58.5%',
     height: '100vh',
@@ -31,6 +30,7 @@ const Signup = ({ user, register }) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formElements = form.elements;
+
     const username = formElements.username.value;
     const email = formElements.email.value;
     const password = formElements.password.value;
@@ -42,31 +42,32 @@ const Signup = ({ user, register }) => {
     if (user && user.id) history.push('/home');
   }, [user, history]);
 
-  const matches = useMediaQuery('(max-width:700px)');
-  const isMobile = !!matches;
+  const isMobile = useMediaQuery('(max-width:700px)');
 
   return (
     <AuthLayout>
       {
         !isMobile && 
-        <Hint
-        hintText='Already have an account?'
-        link='/login'
-        buttonText='Login'
-      />
+          <Hint
+            hintText='Already have an account?'
+            link='/login'
+            buttonText='Login'
+          />
       }
 
       <Box className={classes.container}>
+        
         <AuthForm
          authHandler={handleRegister}
          isMobile={isMobile}
          title={'Create an account.'}
-         sumbitButtonValue={'Register'}
+         sumbitButtonValue={'Create'}
         >
           <IInput type="text" name="username" isRequired />
           <IInput type="email" name="email" label='E-mail address' isRequired />
           <IInput type="password" name="password" isRequired />
         </AuthForm>
+
       </Box>
     </AuthLayout>
   );

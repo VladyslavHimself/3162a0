@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { IButton } from '../Ui/Button/component';
 
-const hintStyle = makeStyles({
+const hintStyles = makeStyles({
   hint: {
     display: 'flex',
     width: 'fit-content',
@@ -32,11 +32,11 @@ const hintStyle = makeStyles({
 })
 
 export const Hint = ({ hintText, link, buttonText }) => {
-  const classes = hintStyle();
+  const classes = hintStyles();
 
   return (
     <Box className={classes.hint}>
-      <span className={classes.hint__text}>{hintText}</span>
+      <p className={classes.hint__text}>{hintText}</p>
       <Box padding='140px 20px'>
         <Link href={link} to={link} style={{textDecoration: 'none'}}>
           <IButton styleType='ghost' text={buttonText} />

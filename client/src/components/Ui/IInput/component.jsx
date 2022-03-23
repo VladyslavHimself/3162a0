@@ -21,7 +21,6 @@ export const IInput = ({
    label = convertToUppercase(name),
    isRequired = false
  }) => {
-  
   const classes = inputStyles();
 
   return (
