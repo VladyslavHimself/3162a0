@@ -3,8 +3,11 @@ import { useHistory } from 'react-router-dom';
 import {
   Box,
   useMediaQuery,
-  makeStyles
+  makeStyles,
+  
 } from '@material-ui/core';
+
+import { Link } from 'react-router-dom';
 
 import { AuthLayout } from './Layouts/AuthLayout/component';
 import Hint from './components/Hint';
@@ -63,8 +66,9 @@ const Login = ({ user, login }) => {
          title='Welcome back!'
          sumbitButtonValue='Login'
         >
+          
           <IInput type="username" name="username" label='Username' isRequired />
-          <IInput type="password" name="password" isRequired />
+          <IInput type="password" name="password" withForgotLink isRequired />
         </AuthForm>
       </Box>
     </AuthLayout>
