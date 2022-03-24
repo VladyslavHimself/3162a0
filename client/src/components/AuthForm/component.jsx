@@ -39,7 +39,7 @@ const authFormStyles = makeStyles({
   }
 });
 
-export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonValue }) => {
+export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonValue, mobileHintProps }) => {
   const classes = authFormStyles();
 
   return (
@@ -54,8 +54,8 @@ export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonV
           (
             <Box display='flex' justifyContent='space-between' marginTop='40px'>
               <Box className={classes['auth-form__submit-button']}>
-                <Link href='/login' to='/login' style={{textDecoration: 'none'}}>
-                  <IButton styleType='outline' text='Login' />
+                <Link href={mobileHintProps.href} to={mobileHintProps.href} style={{textDecoration: 'none'}}>
+                  <IButton styleType='outline' text={ mobileHintProps.buttonText } />
                 </Link>
               </Box>
 

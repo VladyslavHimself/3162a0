@@ -65,6 +65,10 @@ const Login = ({ user, login }) => {
          isMobile={isMobile} 
          title='Welcome back!'
          sumbitButtonValue='Login'
+         mobileHintProps={{
+          href: '/register',
+          buttonText: 'Create account',
+         }}
         >
           
           <IInput type="username" name="username" label='Username' isRequired />

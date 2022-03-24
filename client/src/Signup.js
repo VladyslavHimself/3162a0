@@ -62,6 +62,10 @@ const Signup = ({ user, register }) => {
          isMobile={isMobile}
          title={'Create an account.'}
          sumbitButtonValue={'Create'}
+         mobileHintProps={{
+           href: '/login',
+           buttonText: 'Login',
+         }}
         >
           <IInput type="text" name="username" isRequired />
           <IInput type="email" name="email" label='E-mail address' isRequired />
