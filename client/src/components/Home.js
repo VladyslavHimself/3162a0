@@ -78,8 +78,7 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback((recipientId, message) => {
     
-    const newState = [...conversations];
-    newState.forEach((convo) => {
+    conversations.forEach((convo) => {
       if (convo.otherUser.id === recipientId) {
         convo.messages.push(message);
         convo.latestMessageText = message.text;
@@ -87,7 +86,7 @@ const Home = ({ user, logout }) => {
       }
     });
     
-    setConversations(newState);
+    setConversations([...conversations]);
   }, [conversations, setConversations]);
 
   const addMessageToConversation = useCallback(
@@ -105,14 +104,13 @@ const Home = ({ user, logout }) => {
         
       }
       
-      const newState = [...conversations];
-      newState.forEach((convo) => {
+      conversations.forEach((convo) => {
         if (convo.id === message.conversationId) {
           convo.messages.push(message);
           convo.latestMessageText = message.text;
         }});
 
-      setConversations(newState);
+      setConversations(conversations);
     },[conversations, setConversations],
   );
 
