@@ -106,13 +106,13 @@ const Home = ({ user, logout }) => {
       }
       
       const newState = [...conversations];
-      conversations.forEach((convo) => {
+      newState.forEach((convo) => {
         if (convo.id === message.conversationId) {
           convo.messages.push(message);
           convo.latestMessageText = message.text;
         }});
 
-        setConversations(newState);
+      setConversations(newState);
     },[conversations, setConversations],
   );
 
