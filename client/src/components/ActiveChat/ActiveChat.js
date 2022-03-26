@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import {Box, Button} from '@material-ui/core';
 import { Input, Header, Messages } from './index';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,6 +21,10 @@ const useStyles = makeStyles(() => ({
 
   'image-input': {
     position: 'absolute',
+    top: '45%',
+    left: '95%',
+    transform: 'translate(-95%, -45%)',
+    // backgroundColor: '#f4f4f4'
   }
 }));
 
@@ -58,19 +63,27 @@ const ActiveChat = ({
                   otherUser={conversation.otherUser}
                   userId={user.id}
                 />
-                <div>
+                <div style={{position: 'relative'}}>
                   <Input
                     otherUser={conversation.otherUser}
                     conversationId={conversation.id || null}
                     user={user}
-                    postMessage={postMessage}                  
+                    postMessage={postMessage}
                   />
-                  <input
-                   className={classes['image-input']}
-                    type='file'
-                    multiple
-                    onChange={(e) => {setImagesHandler(e.target.files)}}
-                  />
+
+                  <Button
+                      className={classes['image-input']}
+                      variant="contained"
+                      component="label"
+                  >
+                    <AddAPhotoIcon />
+                    <input
+                        type='file'
+                        multiple
+                        onChange={(e) => {setImagesHandler(e.target.files)}}
+                        hidden
+                    />
+                  </Button>
                 </div>
               </>
             )}
