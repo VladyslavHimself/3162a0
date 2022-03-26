@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { Grid, CssBaseline, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {useHistory} from "react-router-dom";
+import {Button, CssBaseline, Grid} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
-import { SidebarContainer } from "../components/Sidebar";
-import { ActiveChat } from "../components/ActiveChat";
-import { SocketContext } from "../context/socket";
+import {SidebarContainer} from "../components/Sidebar";
+import {ActiveChat} from "../components/ActiveChat";
+import {SocketContext} from "../context/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,10 +64,10 @@ const Home = ({ user, logout }) => {
   const postMessage = async (body) => {
     try {
       const attachmentData = await uploadImagesToCloudAndReceiveUrl();
-      const attachmentUrls = attachmentData.map(photo => photo.data.url);
-
+      body.attachments = attachmentData.map(photo => photo.data.url);
       const data = await saveMessage(body);
-      data.message.attachments = attachmentUrls;
+
+      selectImages([]);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);

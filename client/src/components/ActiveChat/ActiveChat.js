@@ -69,7 +69,6 @@ const ActiveChat = ({
                    className={classes['image-input']}
                     type='file'
                     multiple
-                    
                     onChange={(e) => {setImagesHandler(e.target.files)}}
                   />
                 </div>
