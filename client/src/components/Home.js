@@ -22,6 +22,7 @@ const Home = ({ user, logout }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
+  const [selectedImages, selectImages] = useState([]);
 
   const addSearchedUsers = (users) => {
     const currentUsers = {};
@@ -62,6 +63,8 @@ const Home = ({ user, logout }) => {
 
   const postMessage = async (body) => {
     try {
+      const urls = await uploadImagesToCloudAndReceiveUrl();
+      console.log(urls);
       const data = await saveMessage(body);
 
       if (!body.conversationId) {
@@ -73,7 +76,28 @@ const Home = ({ user, logout }) => {
       sendMessage(data, body);
     } catch (error) {
       console.error(error);
+    }    
+  };
+
+  const uploadImagesToCloudAndReceiveUrl = () => {
+    const defaultAxiosInstance = axios.create();
+    const uploadPreset = 'dwisnxef';
+    const cloudinaryApiLink = 'https://api.cloudinary.com/v1_1/djaaznipg/image/upload';
+
+    const receivedPhotoUrls = [];
+
+    const _postImage = async (image) => {
+      const formData = new FormData();
+      formData.append('file', image);
+      formData.append('upload_preset', uploadPreset);
+      return defaultAxiosInstance.post(cloudinaryApiLink, formData);
     }
+
+    [...selectedImages].forEach(async (selectedImage) => {
+      receivedPhotoUrls.push(_postImage(selectedImage));
+    });
+
+    return Promise.all([...receivedPhotoUrls]).then(data => data);
   };
 
   const addNewConvo = useCallback((recipientId, message) => {
@@ -227,6 +251,7 @@ const Home = ({ user, logout }) => {
           conversations={conversations}
           user={user}
           postMessage={postMessage}
+          setImagesHandler={selectImages}
         />
       </Grid>
     </>

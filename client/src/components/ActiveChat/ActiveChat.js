@@ -17,6 +17,10 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     justifyContent: 'space-between',
   },
+
+  'image-input': {
+    position: 'absolute',
+  }
 }));
 
 const ActiveChat = ({
@@ -24,6 +28,7 @@ const ActiveChat = ({
   conversations,
   activeConversation,
   postMessage,
+  setImagesHandler,
 }) => {
   const classes = useStyles();
 
@@ -53,12 +58,21 @@ const ActiveChat = ({
                   otherUser={conversation.otherUser}
                   userId={user.id}
                 />
-                <Input
-                  otherUser={conversation.otherUser}
-                  conversationId={conversation.id || null}
-                  user={user}
-                  postMessage={postMessage}
-                />
+                <div>
+                  <Input
+                    otherUser={conversation.otherUser}
+                    conversationId={conversation.id || null}
+                    user={user}
+                    postMessage={postMessage}                  
+                  />
+                  <input
+                   className={classes['image-input']}
+                    type='file'
+                    multiple
+                    
+                    onChange={(e) => {setImagesHandler(e.target.files)}}
+                  />
+                </div>
               </>
             )}
           </Box>
