@@ -64,7 +64,7 @@ const Home = ({ user, logout }) => {
   const postMessage = async (body) => {
     try {
       const attachmentData = await uploadImagesToCloudAndReceiveUrl();
-      body.attachments = attachmentData.map(photo => photo.data.url);
+      body.attachments = attachmentData.map(photo => photo.value.data.url);
       const data = await saveMessage(body);
 
       selectImages([]);
