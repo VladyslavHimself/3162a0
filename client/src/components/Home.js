@@ -99,8 +99,9 @@ const Home = ({ user, logout }) => {
       receivedPhotoData.push(_postImage(selectedImage));
     });
 
-    // #TODO maybe it be better with Promise.allSettled
-    return Promise.all([...receivedPhotoData]).then(photos => photos);
+    return Promise.allSettled([...receivedPhotoData]).then(photos => photos).catch((err) => {
+      throw new Error(`Some of images don't received! Error: ${err}`);
+    });
   };
 
   const addNewConvo = useCallback((recipientId, message) => {
