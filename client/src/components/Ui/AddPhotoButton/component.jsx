@@ -14,7 +14,7 @@ const useButtonStyles = makeStyles({
 
 
 
-export const AddPhotoButton = (setImagesHandler) => {
+export const AddPhotoButton = ({ setImagesHandler }) => {
     const classes = useButtonStyles();
 
     return (
