@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Box, Button} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import { Input, Header, Messages } from './index';
 import AddPhotoButton from "../Ui/AddPhotoButton";
 

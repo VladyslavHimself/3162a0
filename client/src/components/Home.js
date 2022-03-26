@@ -99,6 +99,7 @@ const Home = ({ user, logout }) => {
       receivedPhotoData.push(_postImage(selectedImage));
     });
 
+    // #TODO maybe it be better with Promise.allSettled
     return Promise.all([...receivedPhotoData]).then(photos => photos);
   };
 
