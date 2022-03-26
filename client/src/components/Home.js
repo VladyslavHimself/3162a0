@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {SidebarContainer} from "../components/Sidebar";
 import {ActiveChat} from "../components/ActiveChat";
 import {SocketContext} from "../context/socket";
+import {CloudinaryService} from "../services/CloudinaryAPI/cloudinary.service";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +20,15 @@ const Home = ({ user, logout }) => {
   const socket = useContext(SocketContext);
   const classes = useStyles();
 
+  const uploadPreset = 'dwisnxef';
+  const apiLink = 'https://api.cloudinary.com/v1_1/djaaznipg/image/upload';
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
   const [selectedImages, selectImages] = useState([]);
+
+  const cloudinary = new CloudinaryService(uploadPreset, apiLink, selectedImages);
 
   const addSearchedUsers = (users) => {
     const currentUsers = {};
@@ -63,7 +69,7 @@ const Home = ({ user, logout }) => {
 
   const postMessage = async (body) => {
     try {
-      const attachmentData = await uploadImagesToCloudAndReceiveUrl();
+      const attachmentData = await cloudinary.postImageAndReceiveData();
       body.attachments = attachmentData.map(photo => photo.value.data.url);
       const data = await saveMessage(body);
 
@@ -79,29 +85,6 @@ const Home = ({ user, logout }) => {
     } catch (error) {
       console.error(error);
     }    
-  };
-
-  const uploadImagesToCloudAndReceiveUrl = () => {
-    const defaultAxiosInstance = axios.create();
-    const uploadPreset = 'dwisnxef';
-    const cloudinaryApiLink = 'https://api.cloudinary.com/v1_1/djaaznipg/image/upload';
-
-    const receivedPhotoData = [];
-
-    const _postImage = async (image) => {
-      const formData = new FormData();
-      formData.append('file', image);
-      formData.append('upload_preset', uploadPreset);
-      return defaultAxiosInstance.post(cloudinaryApiLink, formData);
-    }
-
-    [...selectedImages].forEach(async (selectedImage) => {
-      receivedPhotoData.push(_postImage(selectedImage));
-    });
-
-    return Promise.allSettled([...receivedPhotoData]).then(photos => photos).catch((err) => {
-      throw new Error(`Some of images don't received! Error: ${err}`);
-    });
   };
 
   const addNewConvo = useCallback((recipientId, message) => {
