@@ -63,9 +63,11 @@ const Home = ({ user, logout }) => {
 
   const postMessage = async (body) => {
     try {
-      const urls = await uploadImagesToCloudAndReceiveUrl();
-      console.log(urls);
+      const attachmentData = await uploadImagesToCloudAndReceiveUrl();
+      const attachmentUrls = attachmentData.map(photo => photo.data.url);
+
       const data = await saveMessage(body);
+      data.message.attachments = attachmentUrls;
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -84,7 +86,7 @@ const Home = ({ user, logout }) => {
     const uploadPreset = 'dwisnxef';
     const cloudinaryApiLink = 'https://api.cloudinary.com/v1_1/djaaznipg/image/upload';
 
-    const receivedPhotoUrls = [];
+    const receivedPhotoData = [];
 
     const _postImage = async (image) => {
       const formData = new FormData();
@@ -94,10 +96,10 @@ const Home = ({ user, logout }) => {
     }
 
     [...selectedImages].forEach(async (selectedImage) => {
-      receivedPhotoUrls.push(_postImage(selectedImage));
+      receivedPhotoData.push(_postImage(selectedImage));
     });
 
-    return Promise.all([...receivedPhotoUrls]).then(data => data);
+    return Promise.all([...receivedPhotoData]).then(photos => photos);
   };
 
   const addNewConvo = useCallback((recipientId, message) => {
