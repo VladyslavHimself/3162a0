@@ -73,9 +73,9 @@ const SenderBubble = ({ time, text, images }) => {
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
       <Box className={classes.bubble}>
-      { images && images.map(image => (
-          <a href={image}>
-            <img key={text} className={cls.join(' ')} src={image} alt={`img with description ${text}`} />
+      { images && images.map((image, idx) => (
+          <a key={text} href={image}>
+            <img className={cls.join(' ')} src={image} alt={`img with description ${text}`} />
           </a>
       )) }
       { text && <Typography className={classes.text}>{text}</Typography> }
