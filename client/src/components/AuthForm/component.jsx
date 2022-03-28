@@ -29,7 +29,7 @@ const authFormStyles = makeStyles({
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '24px',
+    fontSize: '20px',
     lineHeight: '40px',
     marginBottom: '20px',
   },

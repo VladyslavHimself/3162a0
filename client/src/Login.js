@@ -7,8 +7,6 @@ import {
   
 } from '@material-ui/core';
 
-import { Link } from 'react-router-dom';
-
 import { AuthLayout } from './Layouts/AuthLayout/component';
 import Hint from './components/Hint';
 import { AuthForm } from './components/AuthForm/component';
