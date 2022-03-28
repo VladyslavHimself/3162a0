@@ -10,7 +10,8 @@ import chatSvg from './../../assets/chat-icon.svg';
 const sideBannerStyles = makeStyles({
   'side-banner__image': {
     width: '100%',
-    height: 'inherit'
+    height: 'inherit',
+    objectFit: 'cover'
   },
 
   'side-banner': {
@@ -57,12 +58,12 @@ export const AuthLayout = ({ children }) => {
     <Box className='wrapper' display='flex' justifyContent={'center'} alignItems={'center'}>
       { isMobile && (
           <Box className={classes['side-banner']}>
-          <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
-          <Box className={classes['side-banner__textbox']}>
-            <img className={classes['side-banner__logo']} src={chatSvg} alt='chat-logo' />
-            <h1 className={classes['side-banner__header']}>Converse with anyone with any language</h1>
+            <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
+            <Box className={classes['side-banner__textbox']}>
+              <img className={classes['side-banner__logo']} src={chatSvg} alt='chat-logo' />
+              <h1 className={classes['side-banner__header']}>Converse with anyone with any language</h1>
+            </Box>
           </Box>
-        </Box>   
       )}
       { children }
     </Box>

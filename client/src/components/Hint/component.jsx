@@ -16,7 +16,6 @@ const hintStyles = makeStyles({
     left: '90%',
     top: '3%',
     transform: 'translate(-90%, -10%)',
-
   },
 
   hint__text: {
