@@ -51,7 +51,7 @@ export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonV
 
   return (
     <Box className={authFormCls.join(' ')}>
-      <h2 className={classes['auth-form__header']}>{title}</h2>
+      <Typography className={classes['auth-form__header']}>{title}</Typography>
       <form className={classes['auth-form__form-field']} onSubmit={authHandler}>
 
         {children}
