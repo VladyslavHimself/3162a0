@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import {
   Box,
   makeStyles,
+  Typography,
 } from '@material-ui/core';
 import { IButton } from '../Ui/Button/component';
 
@@ -35,7 +36,7 @@ export const Hint = ({ hintText, link, buttonText }) => {
 
   return (
     <Box className={classes.hint}>
-      <p className={classes.hint__text}>{hintText}</p>
+      <Typography className={classes.hint__text}>{hintText}</Typography>
       <Box padding='140px 20px'>
         <Link href={link} to={link} style={{textDecoration: 'none'}}>
           <IButton styleType='ghost' text={buttonText} />
