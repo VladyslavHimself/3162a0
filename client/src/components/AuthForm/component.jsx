@@ -29,18 +29,16 @@ const authFormStyles = makeStyles({
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '26px',
+    fontSize: '24px',
     lineHeight: '40px',
     marginBottom: '20px',
   },
 
   'auth-form__submit-button': {
-    width:'140px',
+    width:'160px',
     height:'54px',
     display:'flex',
     alignSelf:'center',
-
-    marginTop: '40px'
   }
 });
 
@@ -61,8 +59,8 @@ export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonV
         {
           isMobile ? 
           (
-            <Box display='flex' justifyContent='space-between' marginTop='40px'>
-              <Box className={classes['auth-form__submit-button']}>
+            <Box display='flex' flexDirection='column-reverse' alignItems='center' justifyContent='center' marginTop='40px'>
+              <Box className={classes['auth-form__submit-button']} justifyContent='center'>
                 <Link href={mobileHintProps.href} to={mobileHintProps.href} style={{textDecoration: 'none'}}>
                   <IButton styleType='outline' text={ mobileHintProps.buttonText } />
                 </Link>
@@ -75,7 +73,7 @@ export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonV
           ) 
             : 
           (
-            <Box className={classes['auth-form__submit-button']}>
+            <Box className={classes['auth-form__submit-button']} marginTop='20px'>
               <IButton styleType='accent' text={sumbitButtonValue} isSubmit />
             </Box>
           )
