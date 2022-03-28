@@ -28,7 +28,8 @@ const sideBannerStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    textAlign: 'center',
   },
 
   'side-banner__header': {
