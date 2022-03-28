@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Box,
   makeStyles,
+  Typography
 } from '@material-ui/core';
 
 import IButton from './../Ui/Button';
