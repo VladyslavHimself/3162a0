@@ -8,7 +8,7 @@ import {
 import bgImg from './../../../src/assets/bg-img.png';
 import chatSvg from './../../assets/chat-icon.svg';
 
-const sideBannerStyles = makeStyles({
+const authStyles = makeStyles({
   'side-banner__image': {
     width: '100%',
     height: 'inherit',
@@ -48,16 +48,22 @@ const sideBannerStyles = makeStyles({
     width: '66px',
     height: '66px',
   },
+
+  'wrapper': {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 export const AuthLayout = ({ children }) => {
-  const classes = sideBannerStyles();
+  const classes = authStyles();
 
   const matchesMedia = useMediaQuery('(min-width: 700px)');
   const isMobile = matchesMedia;
 
   return (
-    <Box className='wrapper' display='flex' justifyContent={'center'} alignItems={'center'}>
+    <Box className={classes.wrapper}>
       { isMobile && (
           <Box className={classes['side-banner']}>
             <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
