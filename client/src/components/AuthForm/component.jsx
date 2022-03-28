@@ -6,8 +6,7 @@ import {
 } from '@material-ui/core';
 
 import IButton from './../Ui/Button';
-
-import { Link } from 'react-router-dom';
+import UndecoratedLink from '../../Layouts/UndecoratedLink';
 
 const authFormStyles = makeStyles({
   'auth-form': {
@@ -75,16 +74,16 @@ export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonV
           (
             <Box className={classes['buttons-field']}>
               <Box className={classes['auth-form__submit-button']}>
-                <Link className={classes.link} href={mobileHintProps.href} to={mobileHintProps.href}>
+                <UndecoratedLink href={mobileHintProps.href} to={mobileHintProps.href}>
                   <IButton styleType='outline' text={ mobileHintProps.buttonText } />
-                </Link>
+                </UndecoratedLink>
               </Box>
 
               <Box className={classes['auth-form__submit-button']}>
                 <IButton styleType='accent' text={sumbitButtonValue} isSubmit />
               </Box>
             </Box>
-          ) 
+          )
             : 
           (
             <Box className={classes['auth-form__submit-button']} marginTop='20px'>
