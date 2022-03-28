@@ -2,6 +2,7 @@ import {
   Box,
   makeStyles,
   useMediaQuery,
+  Typography
 } from '@material-ui/core';
 
 import bgImg from './../../../src/assets/bg-img.png';
@@ -62,7 +63,7 @@ export const AuthLayout = ({ children }) => {
             <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
             <Box className={classes['side-banner__textbox']}>
               <img className={classes['side-banner__logo']} src={chatSvg} alt='chat-logo' />
-              <h1 className={classes['side-banner__header']}>Converse with anyone with any language</h1>
+              <Typography className={classes['side-banner__header']}>Converse with anyone with any language</Typography>
             </Box>
           </Box>
       )}
