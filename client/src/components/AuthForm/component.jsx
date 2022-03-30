@@ -14,11 +14,6 @@ const authFormStyles = makeStyles({
     width: '380px',
   },
 
-  'auth-form--mobile': {
-    marginTop: '50px',
-    width: '290px',
-  },
-
   'auth-form__form-field': {
     display: 'flex',
     flexDirection: 'column',
@@ -58,12 +53,8 @@ const authFormStyles = makeStyles({
 export const AuthForm = ({ isMobile, authHandler, children, title, sumbitButtonValue, mobileHintProps }) => {
   const classes = authFormStyles();
 
-  const authFormCls = [classes['auth-form']];
-
-  isMobile && authFormCls.push(classes['auth-form--mobile']);
-
   return (
-    <Box className={authFormCls.join(' ')}>
+    <Box className={classes['auth-form']}>
       <Typography className={classes['auth-form__header']}>{title}</Typography>
       <form className={classes['auth-form__form-field']} onSubmit={authHandler}>
 
