@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
 import {
   Box,
   makeStyles,
+  Typography,
 } from '@material-ui/core';
 import { IButton } from '../Ui/Button/component';
 
+import UndecoratedLink from '../../Layouts/UndecoratedLink';
+
 const hintStyles = makeStyles({
+  'hint-container': {
+    padding: '140px 20px',
+  },
+
   hint: {
     display: 'flex',
     width: 'fit-content',
@@ -16,7 +22,6 @@ const hintStyles = makeStyles({
     left: '90%',
     top: '3%',
     transform: 'translate(-90%, -10%)',
-
   },
 
   hint__text: {
@@ -28,7 +33,6 @@ const hintStyles = makeStyles({
     textAlign: 'center',
     color: '#B0B0B0',
   },
-
 })
 
 export const Hint = ({ hintText, link, buttonText }) => {
@@ -36,11 +40,11 @@ export const Hint = ({ hintText, link, buttonText }) => {
 
   return (
     <Box className={classes.hint}>
-      <p className={classes.hint__text}>{hintText}</p>
-      <Box padding='140px 20px'>
-        <Link href={link} to={link} style={{textDecoration: 'none'}}>
+      <Typography className={classes.hint__text}>{hintText}</Typography>
+      <Box className={classes['hint-container']}>
+        <UndecoratedLink href={link} to={link}>
           <IButton styleType='ghost' text={buttonText} />
-        </Link>
+        </UndecoratedLink>
       </Box>
     </Box>
   )

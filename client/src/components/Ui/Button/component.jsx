@@ -1,54 +1,37 @@
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
-const buttonStyles = makeStyles({
+const buttonStyles = styleType => makeStyles(() => ({
 
   'button': {
-    boxShadow: '0px 2px 12px rgba(74, 106, 149, 0.2)',
-    borderRadius: '5px',
     width: '100%',
     height: '100%',
-  },
 
-  'ghost': {
-    background: '#FFFFFF',
-    color: '#3A8DFF',
-  },
-
-  'outline': {
-    background: 'transparent',
-    color: '#3A8DFF',
-    boxShadow: 'none',
+    color:
+        styleType === 'outline' | styleType === 'ghost' ? '#3A8DFF' : '#f4f4f4',
+    background:
+        styleType === 'outline' | styleType === 'ghost' ? 'transparent' : '#3A8DFF',
+    boxShadow:
+        styleType === 'ghost' ? '0px 2px 12px rgba(74, 106, 149, 0.2)' : 'none',
+    borderRadius: '5px',
 
     '&:hover': {
-      background: 'transparent',
+      background:
+          styleType === 'accent' ? '#0B8DAA' : styleType === 'outline' && 'transparent',
+      boxShadow: styleType === 'outline' && 'none',
     }
   },
 
-  'accent': {
-    background: '#3A8DFF',
-    color: '#fff',
-
-    '&:hover': {
-      background: '#0B8DAA',
-    }
-  },
-})
+}));
 
 export const IButton = ({ styleType = 'accent', text, isSubmit = false }) => {
-  const classes = buttonStyles();
-
-  const cls = [classes.button];
-
-  styleType === 'ghost' && cls.push(classes.ghost);
-  styleType === 'accent' && cls.push(classes.accent);
-  styleType === 'outline' && cls.push(classes.outline);
+  const classes = buttonStyles(styleType)();
 
   return (
     <Button
       variant="contained"
       size="large"
       type={ isSubmit ? 'submit' : 'button' }
-      className={cls.join(' ')}
+      className={classes.button}
     >
       { text }
     </Button>

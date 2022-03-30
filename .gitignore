@@ -23,5 +23,5 @@ client/cypress/videos
 client/cypress/screenshots
 
 
-# webstorm extenstions
-.idea/discord.xml
+#idea extensions
+.idea/
