@@ -23,5 +23,5 @@ client/cypress/videos
 client/cypress/screenshots
 
 
-#idea extensions
+#webstorm extensions
 .idea/
