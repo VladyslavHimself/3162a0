@@ -41,13 +41,14 @@ export class CloudinaryService {
     *   @description - function with incapsulated logic. Takes data from constructor, post images to cloud & receive data.
     *   @returns {Void} - all pending image promises. The are only avaliable, if all promises received.
     */
-    postImageAndReceiveData = () => {
+    postImageAndReceiveData = async () => {
         const imageDataPromises = [];
         this._collectAllImagePromises(imageDataPromises);
 
-        return Promise.allSettled([...imageDataPromises]).then(photos => photos).catch((err) => {
-            throw new Error(`Some of images don't received! Error: ${err}`);
-        });
+        try {
+            return await Promise.allSettled([...imageDataPromises]);
+        } catch (e) {
+            throw new Error(e);
+        }
     }
-
 }
