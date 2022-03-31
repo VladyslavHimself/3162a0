@@ -23,8 +23,6 @@ const Home = ({ user, logout }) => {
   const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
   const apiLink = process.env.REACT_APP_API_LINK;
 
-  console.log(uploadPreset, apiLink);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
