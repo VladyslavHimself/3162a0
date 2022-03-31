@@ -34,7 +34,9 @@ export const MessageContent = ({images, text, isAccountSender, componentStyles})
                     </Link>
                 ))
             }
-            {((text && images.length === 1) || (text && !images.length)) && <Typography className={classes.text}>{text}</Typography>}
+            {
+                ((text && images.length === 1) || (text && !images.length)) && <Typography className={classes.text}>{text}</Typography>
+            }
         </Box>
     );
 };
