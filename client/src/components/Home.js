@@ -9,7 +9,7 @@ import {ActiveChat} from "../components/ActiveChat";
 import {SocketContext} from "../context/socket";
 import {CloudinaryService} from "../services/CloudinaryAPI/cloudinary.service";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100vh",
   },
@@ -26,7 +26,7 @@ const Home = ({ user, logout }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
-  const [selectedImages, selectImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const cloudinary = new CloudinaryService(uploadPreset, apiLink, selectedImages);
 
@@ -73,7 +73,7 @@ const Home = ({ user, logout }) => {
       body.attachments = attachmentData.map(photo => photo.value.data.url);
       const data = await saveMessage(body);
 
-      selectImages([]);
+      setSelectedImages([]);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -238,7 +238,7 @@ const Home = ({ user, logout }) => {
           conversations={conversations}
           user={user}
           postMessage={postMessage}
-          setImagesHandler={selectImages}
+          setImagesHandler={setSelectedImages}
         />
       </Grid>
     </>
