@@ -21,7 +21,7 @@ const authStyles = makeStyles({
     position: 'relative',
   },
 
-  'side-banner__textbox': {
+  'side-banner__textBox': {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -64,17 +64,20 @@ export const AuthLayout = ({ children }) => {
 
   return (
     <Box className={classes.wrapper}>
-      { isMobile && (
+      {
+        isMobile && (
           <Box className={classes['side-banner']}>
             <img className={classes['side-banner__image']} src={bgImg} alt='side-banner' />
-            <Box className={classes['side-banner__textbox']}>
+            <Box className={classes['side-banner__textBox']}>
               <img className={classes['side-banner__logo']} src={chatSvg} alt='chat-logo' />
-              <Typography className={classes['side-banner__header']}>Converse with anyone with any language</Typography>
+              <Typography className={classes['side-banner__header']}>
+                Converse with anyone with any language
+              </Typography>
             </Box>
           </Box>
-      )}
+        )
+      }
       { children }
     </Box>
-  )
-
+  );
 }

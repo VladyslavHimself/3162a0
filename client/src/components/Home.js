@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { Grid, CssBaseline, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {useHistory} from "react-router-dom";
+import {Button, CssBaseline, Grid} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
-import { SidebarContainer } from "../components/Sidebar";
-import { ActiveChat } from "../components/ActiveChat";
-import { SocketContext } from "../context/socket";
+import {SidebarContainer} from "../components/Sidebar";
+import {ActiveChat} from "../components/ActiveChat";
+import {SocketContext} from "../context/socket";
+import {CloudinaryService} from "../services/CloudinaryAPI/cloudinary.service";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100vh",
   },
@@ -19,9 +20,15 @@ const Home = ({ user, logout }) => {
   const socket = useContext(SocketContext);
   const classes = useStyles();
 
+  const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
+  const apiLink = process.env.REACT_APP_API_LINK;
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const cloudinary = new CloudinaryService(uploadPreset, apiLink, selectedImages);
 
   const addSearchedUsers = (users) => {
     const currentUsers = {};
@@ -62,7 +69,11 @@ const Home = ({ user, logout }) => {
 
   const postMessage = async (body) => {
     try {
+      const attachmentData = await cloudinary.postImageAndReceiveData();
+      body.attachments = attachmentData.map(photo => photo.value.data.url);
       const data = await saveMessage(body);
+
+      setSelectedImages([]);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -73,7 +84,7 @@ const Home = ({ user, logout }) => {
       sendMessage(data, body);
     } catch (error) {
       console.error(error);
-    }
+    }    
   };
 
   const addNewConvo = useCallback((recipientId, message) => {
@@ -227,6 +238,7 @@ const Home = ({ user, logout }) => {
           conversations={conversations}
           user={user}
           postMessage={postMessage}
+          setImagesHandler={setSelectedImages}
         />
       </Grid>
     </>

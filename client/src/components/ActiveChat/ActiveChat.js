@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import { Input, Header, Messages } from './index';
+import AddPhotoButton from "../Ui/AddPhotoButton";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,6 +25,7 @@ const ActiveChat = ({
   conversations,
   activeConversation,
   postMessage,
+  setImagesHandler,
 }) => {
   const classes = useStyles();
 
@@ -53,12 +55,17 @@ const ActiveChat = ({
                   otherUser={conversation.otherUser}
                   userId={user.id}
                 />
-                <Input
-                  otherUser={conversation.otherUser}
-                  conversationId={conversation.id || null}
-                  user={user}
-                  postMessage={postMessage}
-                />
+                <Box style={{position: 'relative'}}>
+                  <Input
+                    otherUser={conversation.otherUser}
+                    conversationId={conversation.id || null}
+                    user={user}
+                    postMessage={postMessage}
+                  />
+                  
+                  <AddPhotoButton setImagesHandler={setImagesHandler}/>
+                </Box>
+
               </>
             )}
           </Box>
