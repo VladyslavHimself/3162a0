@@ -18,6 +18,7 @@ const Messages = (props) => {
             text={message.text}
             time={time}
             otherUser={otherUser}
+            images={message.attachments}
           />
         );
       })}

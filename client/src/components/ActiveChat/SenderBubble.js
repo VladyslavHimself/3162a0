@@ -27,48 +27,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const useImageStyles = makeStyles(() => ({
+const useImageStyles = (gallerySize, text) => makeStyles(() => ({
   image: {
+    maxWidth:
+        gallerySize.length > 1 ? '128px' : '256px',
+    maxHeight:
+        gallerySize.length > 1 ? '128px' : '256px',
+
+    backgroundSize: 'cover',
+    borderTopRightRadius: '10px',
+    borderTopLeftRadius: '10px',
+    borderRadius: !text && '10px',
+    borderBottomRightRadius: !text && '0px',
+
     transition: '.5s ease',
     '&:hover': {
       filter: 'brightness(0.8)',
     }
   },
-
-  'single': {
-    maxWidth: '256px',
-    maxHeight: '256px',
-    backgroundSize: "cover",
-    borderTopRightRadius: '10px',
-    borderTopLeftRadius: '10px',
-  },
-
-  'without-text': {
-    maxWidth: '256px',
-    maxHeight: '256px',
-    backgroundSize: "cover",
-    borderRadius: '10px',
-    borderBottomRightRadius: '0px',
-  },
-
-  'multiple': {
-    maxWidth: '128px',
-    maxHeight: '128px',
-    backgroundSize: "cover",
-    borderTopRightRadius: '10px',
-    borderTopLeftRadius: '10px',
-  }
-}))
+}));
 
 const SenderBubble = ({ time, text, images }) => {
   const classes = useStyles();
-  const imgCls = useImageStyles();
-  const cls = [ imgCls.image ];
-
-  images.length === 1 && cls.push(imgCls['single']);
-  images.length > 1 && cls.push(imgCls['multiple']);
-  !text && cls.push(imgCls['without-text']);
-
+  const imgCls = useImageStyles(images, text)();
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
@@ -76,7 +57,7 @@ const SenderBubble = ({ time, text, images }) => {
       {
         images && images.map((image, idx) => (
           <a key={`image{${idx}`} href={image}>
-            <img className={cls.join(' ')} src={image} alt={`img with description ${text}`} />
+            <img className={imgCls.image} src={image} alt={`img with description ${text}`} />
           </a>
         ))
       }

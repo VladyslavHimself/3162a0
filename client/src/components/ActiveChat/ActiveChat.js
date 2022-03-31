@@ -55,7 +55,7 @@ const ActiveChat = ({
                   otherUser={conversation.otherUser}
                   userId={user.id}
                 />
-                <div style={{position: 'relative'}}>
+                <Box style={{position: 'relative'}}>
                   <Input
                     otherUser={conversation.otherUser}
                     conversationId={conversation.id || null}
@@ -64,7 +64,7 @@ const ActiveChat = ({
                   />
                   
                   <AddPhotoButton setImagesHandler={setImagesHandler}/>
-                </div>
+                </Box>
 
               </>
             )}
