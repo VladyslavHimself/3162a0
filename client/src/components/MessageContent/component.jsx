@@ -29,7 +29,7 @@ export const MessageContent = ({images, text, isAccountSender, componentStyles})
             {(text && images.length > 1) && <Typography className={classes.text}>{text}</Typography>}
             {
                 images && images.map((image) => (
-                    <Link key={Math.random()} href={image}>
+                    <Link key={image} href={image}>
                         <img className={imgCls.image} src={image} alt={`img with description ${text}`} />
                     </Link>
                 ))
