@@ -20,8 +20,8 @@ const Home = ({ user, logout }) => {
   const socket = useContext(SocketContext);
   const classes = useStyles();
 
-  const uploadPreset = 'dwisnxef';
-  const apiLink = 'https://api.cloudinary.com/v1_1/djaaznipg/image/upload';
+  const uploadPreset = process.env.UPLOAD_PRESET;
+  const apiLink = process.env.API_LINK;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
