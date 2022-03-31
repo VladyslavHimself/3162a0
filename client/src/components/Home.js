@@ -20,8 +20,10 @@ const Home = ({ user, logout }) => {
   const socket = useContext(SocketContext);
   const classes = useStyles();
 
-  const uploadPreset = process.env.UPLOAD_PRESET;
-  const apiLink = process.env.API_LINK;
+  const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
+  const apiLink = process.env.REACT_APP_API_LINK;
+
+  console.log(uploadPreset, apiLink);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [conversations, setConversations] = useState([]);
